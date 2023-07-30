@@ -40,7 +40,8 @@ wss.on("connection", function connection(ws) {
       fs.writeFile(path, bufferData, () => {
         console.log("file saved:" + path);
       });
-      filePath = "http://localhost:4040" + "/uploads/" + filename;
+      filePath =
+        "https://chat-client-r2rw.onrender.com" + "/uploads/" + filename;
     }
 
     wss.clients.forEach((client) => {
