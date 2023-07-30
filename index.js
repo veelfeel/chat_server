@@ -25,7 +25,9 @@ wss.on("connection", function connection(ws) {
 
   ws.on("message", (data) => {
     const messageData = JSON.parse(data);
-    const { file } = messageData;
+    const { sender_id, message, file } = messageData;
+    let imagePath = "";
+
     if (file) {
       const parts = file.name.split(".");
       const ext = parts[parts.length - 1];
@@ -38,11 +40,12 @@ wss.on("connection", function connection(ws) {
       fs.writeFile(path, bufferData, () => {
         console.log("file saved:" + path);
       });
+      imagePath = "http://localhost:4040" + "/uploads/" + filename;
     }
 
     wss.clients.forEach((client) => {
       if (client !== ws && client.readyState === WebSocket.OPEN) {
-        client.send(JSON.stringify(messageData));
+        client.send(JSON.stringify({ sender_id, message, imagePath }));
       }
     });
   });
