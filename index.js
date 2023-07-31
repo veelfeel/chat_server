@@ -1,25 +1,25 @@
-import express from "express";
+// import express from "express";
 import WebSocket, { WebSocketServer } from "ws";
-import path from "path";
-import { fileURLToPath } from "url";
+// import path from "path";
+// import { fileURLToPath } from "url";
 import fs from "fs";
 
 const HOST = "https://chat-cpwa.onrender.com";
 // const HOST = "http://localhost:4040";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
 
-const app = express();
-app.use("/uploads", express.static(__dirname + "/uploads"));
+// const app = express();
+// app.use("/uploads", express.static(__dirname + "/uploads"));
 
-app.listen(4040, (err) => {
-  if (err) {
-    return console.log(err);
-  }
+// app.listen(4040, (err) => {
+//   if (err) {
+//     return console.log(err);
+//   }
 
-  console.log("server running at port 4040");
-});
+//   console.log("server running at port 4040");
+// });
 
 const wss = new WebSocketServer({ port: 8080 });
 
