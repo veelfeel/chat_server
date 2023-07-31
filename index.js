@@ -4,6 +4,9 @@ import path from "path";
 import { fileURLToPath } from "url";
 import fs from "fs";
 
+const HOST = "https://chat-cpwa.onrender.com";
+// const HOST = "http://localhost:4040";
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -40,7 +43,7 @@ wss.on("connection", function connection(ws) {
       fs.writeFile(path, bufferData, () => {
         console.log("file saved:" + path);
       });
-      filePath = "https://chat-cpwa.onrender.com" + "/uploads/" + filename;
+      filePath = HOST + "/uploads/" + filename;
     }
 
     wss.clients.forEach((client) => {
