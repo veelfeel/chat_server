@@ -1,3 +1,4 @@
+import http from "http";
 import express from "express";
 import WebSocket, { WebSocketServer } from "ws";
 import path from "path";
@@ -6,7 +7,6 @@ import fs from "fs";
 
 const HOST = "https://chat-cpwa.onrender.com";
 // const HOST = "http://localhost:8080";
-console.log(1);
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -14,7 +14,7 @@ const __dirname = path.dirname(__filename);
 const app = express();
 app.use("/uploads", express.static(__dirname + "/uploads"));
 
-app.listen(8080, (err) => {
+app.listen(8999, (err) => {
   if (err) {
     return console.log(err);
   }
@@ -22,7 +22,10 @@ app.listen(8080, (err) => {
   console.log("server running at port 8080");
 });
 
-const wss = new WebSocketServer({ port: 8080 });
+const server = http.createServer(app);
+const wss = new WebSocket.Server({ server });
+
+// const wss = new WebSocketServer({ port: 8080 });
 
 wss.on("connection", function connection(ws) {
   console.log("new client connected");
