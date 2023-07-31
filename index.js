@@ -29,9 +29,15 @@ wss.on("connection", function connection(ws) {
   ws.on("message", (data) => {
     const messageData = JSON.parse(data);
     const { sender_id, message, file } = messageData;
-    let filePath = "";
 
-    if (file) {
+    const sendData = {
+      sender_id,
+      message,
+      fileType: null,
+      filePath: null,
+    };
+
+    if (file !== null) {
       const parts = file.name.split(".");
       const ext = parts[parts.length - 1];
       const filename = Date.now() + "." + ext;
@@ -43,18 +49,18 @@ wss.on("connection", function connection(ws) {
       fs.writeFile(path, bufferData, () => {
         console.log("file saved:" + path);
       });
-      filePath = HOST + "/uploads/" + filename;
+
+      sendData.fileType = file.type;
+      sendData.filePath = HOST + "/uploads/" + filename;
     }
 
     wss.clients.forEach((client) => {
       if (client !== ws && client.readyState === WebSocket.OPEN) {
-        client.send(
-          JSON.stringify({ sender_id, message, type: file.type, filePath })
-        );
+        client.send(JSON.stringify(sendData));
       }
     });
   });
-  // console.log(1)
+
   ws.on("close", () => {
     console.log("client has disconnected");
   });
