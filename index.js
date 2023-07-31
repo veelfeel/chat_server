@@ -22,7 +22,7 @@ const server = app.listen(3000, (err) => {
   console.log("server running at port 300");
 });
 
-const wss = new WebSocketServer({ httpServer: server });
+const wss = new WebSocketServer({ server });
 
 wss.on("connection", function connection(ws) {
   console.log("new client connected");
