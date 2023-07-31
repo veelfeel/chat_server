@@ -23,7 +23,7 @@ app.listen(8999, (err) => {
 });
 
 const server = http.createServer(app);
-const wss = new WebSocket.Server({ server });
+const wss = new WebSocketServer({ server });
 
 // const wss = new WebSocketServer({ port: 8080 });
 
