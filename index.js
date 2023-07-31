@@ -1,4 +1,3 @@
-// import http from "http";
 import express from "express";
 import WebSocket, { WebSocketServer } from "ws";
 import path from "path";
@@ -14,12 +13,12 @@ const __dirname = path.dirname(__filename);
 const app = express();
 app.use("/uploads", express.static(__dirname + "/uploads"));
 
-const server = app.listen(3000, (err) => {
+const server = app.listen(8080, (err) => {
   if (err) {
     return console.log(err);
   }
 
-  console.log("server running at port 300");
+  console.log("server running at port 8080");
 });
 
 const wss = new WebSocketServer({ server });
