@@ -54,7 +54,7 @@ wss.on("connection", function connection(ws) {
       }
     });
   });
-
+  console.log(1);
   ws.on("close", () => {
     console.log("client has disconnected");
   });
