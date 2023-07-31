@@ -14,15 +14,15 @@ const __dirname = path.dirname(__filename);
 const app = express();
 app.use("/uploads", express.static(__dirname + "/uploads"));
 
-// app.listen(8080, (err) => {
-//   if (err) {
-//     return console.log(err);
-//   }
+const server = app.listen(3000, (err) => {
+  if (err) {
+    return console.log(err);
+  }
 
-//   console.log("server running at port 8080");
-// });
+  console.log("server running at port 300");
+});
 
-const wss = new WebSocketServer({ port: 8080 });
+const wss = new WebSocketServer({ httpServer: server });
 
 wss.on("connection", function connection(ws) {
   console.log("new client connected");
