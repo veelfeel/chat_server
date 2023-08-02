@@ -4,8 +4,8 @@ import path from "path";
 import { fileURLToPath } from "url";
 import fs from "fs";
 
-const HOST = "https://chat-cpwa.onrender.com";
-// const HOST = "http://localhost:8080";
+// const HOST = "https://chat-cpwa.onrender.com";
+const HOST = "http://localhost:8080";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
