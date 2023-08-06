@@ -41,22 +41,22 @@ wss.on("connection", function connection(ws) {
     };
 
     if (file !== null) {
-      // const parts = file.name.split(".");
-      // const ext = parts[parts.length - 1];
-      // const filename = Date.now() + "." + ext;
+      const parts = file.name.split(".");
+      const ext = parts[parts.length - 1];
+      const filename = Date.now() + "." + ext;
       if (!fs.existsSync("uploads")) {
         fs.mkdirSync("uploads");
       }
-      // const path = __dirname + "/uploads/" + filename;
-      const path = __dirname + "/uploads/" + file.name;
+      const path = __dirname + "/uploads/" + filename;
+      // const path = __dirname + "/uploads/" + file.name;
       const bufferData = new Buffer.from(file.data.split(",")[1], "base64");
       fs.writeFile(path, bufferData, () => {
         console.log("file saved:" + path);
       });
 
       sendData.fileType = file.fileType;
-      // sendData.filePath = HOST + "/uploads/" + filename;
-      sendData.filePath = HOST + "/uploads/" + file.name;
+      sendData.filePath = HOST + "/uploads/" + filename;
+      // sendData.filePath = HOST + "/uploads/" + file.name;
     }
 
     wss.clients.forEach((client) => {
